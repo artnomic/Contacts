@@ -1,4 +1,7 @@
 {
+  "cSpell.showStatus": false,
+  "cSpell.diagnosticLevel": "hint",
+  "cSpell.showInProblemTabOnly": true,
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
