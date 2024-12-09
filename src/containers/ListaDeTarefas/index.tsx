@@ -6,20 +6,20 @@ const tarefas = [
   {
     titulo: 'Estudar sobre React',
     descricao: 'Estudar sobre React',
-    prioridade: 'Baixa',
-    stautsCard: 'Em andamento'
+    prioridade: 'Importante',
+    status: 'Pendente'
   },
   {
     titulo: 'Pagar conta',
     descricao: 'Estudar sobre React',
-    prioridade: 'Alta',
-    stautsCard: 'Pendente'
+    prioridade: 'Urgente',
+    status: 'Pendente'
   },
   {
     titulo: 'Falar com a Carol',
     descricao: 'Estudar sobre React',
-    prioridade: 'Baixa',
-    stautsCard: 'Em andamento'
+    prioridade: 'Importante',
+    status: 'Concluída'
   }
 ]
 
@@ -35,7 +35,7 @@ const ListaDeTarefas = () => (
             titulo={t.titulo}
             descricao={t.descricao}
             prioridade={t.prioridade}
-            statusCard={t.stautsCard}
+            status={t.status}
           />
         </li>
       ))}
