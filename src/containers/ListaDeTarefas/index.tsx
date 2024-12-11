@@ -17,7 +17,7 @@ const ListaDeTarefas = () => {
   return (
     <Container>
       <p>
-        2 tarefas marcadas como: &ldquo;Categoria&rdquo; e &ldquo;{termo}&rdquo;
+        2 tarefas marcadas como: &ldquo;Categoria&rdquo; e &ldquo;{termo}&rdquo
       </p>
       <ul>
         {filtraTarefas().map((t) => (
