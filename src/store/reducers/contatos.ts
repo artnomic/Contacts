@@ -7,23 +7,7 @@ type ContatoState = {
 }
 
 const initialState: ContatoState = {
-  itens: [
-    {
-      id: 1,
-      titulo: 'Arthur Pereira Taveira Berson',
-      descricao: 'Estudar sobre React'
-    },
-    {
-      id: 2,
-      titulo: 'Giovanna Taveira Berson Pereira',
-      descricao: 'Estudar sobre React'
-    },
-    {
-      id: 3,
-      titulo: 'Carol Catalani Silveira',
-      descricao: 'Estudar sobre React'
-    }
-  ]
+  itens: []
 }
 
 const contatosSlice = createSlice({
@@ -43,13 +27,32 @@ const contatosSlice = createSlice({
       if (indexDoContato >= 0) state.itens[indexDoContato] = action.payload
     },
     cadastrar: (state, action: PayloadAction<Omit<Contato, 'id'>>) => {
-      const contatoJaExiste = state.itens.find(
-        (contato) =>
-          contato.titulo.toLowerCase() === action.payload.titulo.toLowerCase()
+      const { titulo, email, telefone } = action.payload
+
+      const contatoComMesmoTitulo = state.itens.find(
+        (contato) => contato.titulo.toLowerCase() === titulo.toLowerCase()
       )
 
-      if (contatoJaExiste) {
-        alert('Já existe uma tarefa com esse nome')
+      const contatoComMesmoEmail = state.itens.find(
+        (contato) => contato.email.toLowerCase() === email.toLowerCase()
+      )
+
+      const contatoComMesmoTelefone = state.itens.find(
+        (contato) => contato.telefone === telefone
+      )
+
+      if (contatoComMesmoTitulo) {
+        alert(
+          `Já existe um contato com o nome "${contatoComMesmoTitulo.titulo}"`
+        )
+      } else if (contatoComMesmoEmail) {
+        alert(
+          `O e-mail "${email}" já está cadastrado no contato "${contatoComMesmoEmail.titulo}"`
+        )
+      } else if (contatoComMesmoTelefone) {
+        alert(
+          `O telefone "${telefone}" já está cadastrado no contato "${contatoComMesmoTelefone.titulo}"`
+        )
       } else {
         const ultimaTarefa = state.itens[state.itens.length - 1]
 

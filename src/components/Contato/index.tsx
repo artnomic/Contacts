@@ -4,23 +4,36 @@ import { useDispatch } from 'react-redux'
 import * as S from './styles'
 
 import { remover, editar } from '../../store/reducers/contatos'
-import TarefaClass from '../../models/Contato'
+import ContatoClass from '../../models/Contato'
 import { Botao, BotaoSalvar } from '../../styles'
+import PhoneInput from '../ValidaTelefone'
+import EmailInput from '../ValidaEmail'
 
-type Props = TarefaClass
+type Props = ContatoClass
 
-const Tarefa = ({ titulo, descricao: descricaoOriginal, id }: Props) => {
+const Contato = ({
+  titulo,
+  telefone: telefoneOriginal,
+  email: emailOriginal,
+  id
+}: Props) => {
   const dispatch = useDispatch()
   const [estaEditando, setestaEditando] = useState(false)
-  const [descricao, setDescricao] = useState('')
+  const [telefone, setTelefone] = useState('')
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
-    if (descricaoOriginal.length > 0) setDescricao(descricaoOriginal)
-  }, [descricaoOriginal])
+    if (telefoneOriginal.length > 0) setTelefone(telefoneOriginal)
+  }, [telefoneOriginal])
+
+  useEffect(() => {
+    if (emailOriginal.length > 0) setEmail(emailOriginal)
+  }, [emailOriginal])
 
   function cancelarEdicao() {
     setestaEditando(false)
-    setDescricao(descricaoOriginal)
+    setTelefone(telefoneOriginal)
+    setEmail(emailOriginal)
   }
 
   return (
@@ -31,11 +44,27 @@ const Tarefa = ({ titulo, descricao: descricaoOriginal, id }: Props) => {
           {titulo}
         </S.Titulo>
       </label>
-      <S.Descricao
-        value={descricao}
-        onChange={(e) => setDescricao(e.target.value)}
-        disabled={!estaEditando}
-      />
+
+      {estaEditando ? (
+        <PhoneInput onValidPhone={(validPhone) => setTelefone(validPhone)} />
+      ) : (
+        <S.CampoContato
+          value={telefone}
+          onChange={(e) => setTelefone(e.target.value)}
+          disabled={!estaEditando}
+        />
+      )}
+
+      {estaEditando ? (
+        <EmailInput onValidEmail={(validEmail) => setEmail(validEmail)} />
+      ) : (
+        <S.CampoContato
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={!estaEditando}
+        />
+      )}
+
       <S.BarraAcoes>
         {estaEditando ? (
           <>
@@ -45,7 +74,8 @@ const Tarefa = ({ titulo, descricao: descricaoOriginal, id }: Props) => {
                   editar({
                     id,
                     titulo,
-                    descricao
+                    telefone,
+                    email
                   })
                 )
                 setestaEditando(false)
@@ -70,4 +100,4 @@ const Tarefa = ({ titulo, descricao: descricaoOriginal, id }: Props) => {
   )
 }
 
-export default Tarefa
+export default Contato

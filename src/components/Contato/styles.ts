@@ -22,15 +22,14 @@ export const Titulo = styled.h3`
   font-weight: bold;
 `
 
-export const Descricao = styled.textarea`
-  color: #8b8b8b;
-  font-size: 14px;
-  line-height: 24px;
+export const CampoContato = styled.textarea`
   font-family: 'Roboto Mono', monospace;
-  display: block;
   width: 100%;
-  margin-bottom: 16px;
-  margin-top: 16px;
+  display: block;
+  font-size: 14px;
+  color: #8b8b8b;
+  margin-bottom: 8px;
+  margin-top: 8px;
   resize: none;
   border: none;
   background-color: transparent;
